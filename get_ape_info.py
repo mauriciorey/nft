@@ -31,23 +31,23 @@ def get_ape_info(apeID):
     data = {'owner': "", 'image': "", 'eyes': ""}
 
     # YOUR CODE HERE
-    contract = web3.eth.contract(address=contract_address, abi=abi)
-    data['owner'] = contract.functions.ownerOf(apeID).call()
-    token_uri = contract.functions.tokenURI(apeID).call()
+    contr = web3.eth.contr(address = contract_address, abi = abi)
+    data['owner'] = contr.functions.ownerOf(apeID).call()
+    token_uri = contr.functions.tokenURI(apeID).call()
     token = token_uri.replace('ipfs://', '')
-    for x, y in gateway.items():
-        if x != 'infura':
-            response = requests.get(y+token)
+    for v, z in gateway.items():
+        if v != 'infura':
+            response = requests.get(z + token)
         else:
-            response = requests.post(y+token)
+            response = requests.post(z + token)
 
         if response.status_code == 200:
-            metadata = response.json()
-            data['image'] = metadata['image']
-            attributes = metadata['attributes']
-            for a in attributes:
-                if a['trait_type'].lower() == 'eyes':
-                    data['eyes'] = a['value']
+            meta = response.json()
+            data['image'] = meta['image']
+            attributes = meta['attributes']
+            for attribute in attributes:
+                if attribute['trait_type'].lower() == 'eyes':
+                    data['eyes'] = attribute['value']
                     break
 
 
