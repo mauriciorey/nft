@@ -37,7 +37,7 @@ def get_ape_info(apeID):
     tok = token_uri.replace('ipfs://', '')
     
 	for v, z in gateway.items():
-		if v != 'infura':
+        if v != 'infura':
             response = requests.get(z + tok)
         else:
             response = requests.post(z + tok)
