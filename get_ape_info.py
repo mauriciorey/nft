@@ -34,12 +34,13 @@ def get_ape_info(apeID):
     contr = web3.eth.contract(address = contract_address, abi = abi)
     data['owner'] = contr.functions.ownerOf(apeID).call()
     token_uri = contr.functions.tokenURI(apeID).call()
-    token = token_uri.replace('ipfs://', '')
-    for v, z in gateway.items():
-        if v != 'infura':
-            response = requests.get(z + token)
+    tok = token_uri.replace('ipfs://', '')
+    
+	for v, z in gateway.items():
+		if v != 'infura':
+            response = requests.get(z + tok)
         else:
-            response = requests.post(z + token)
+            response = requests.post(z + tok)
 
         if response.status_code == 200:
             meta = response.json()
