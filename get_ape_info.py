@@ -31,7 +31,7 @@ def get_ape_info(apeID):
     data = {'owner': "", 'image': "", 'eyes': ""}
 
     # YOUR CODE HERE
-    contr = web3.eth.contr(address = contract_address, abi = abi)
+    contr = web3.eth.contract(address = contract_address, abi = abi)
     data['owner'] = contr.functions.ownerOf(apeID).call()
     token_uri = contr.functions.tokenURI(apeID).call()
     token = token_uri.replace('ipfs://', '')
